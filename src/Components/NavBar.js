@@ -1,6 +1,5 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import NavBarDrawer from './NavBarDrawer';
 
 class NavBar extends React.Component {
   render(){

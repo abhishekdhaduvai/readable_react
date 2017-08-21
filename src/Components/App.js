@@ -12,7 +12,6 @@ class App extends Component {
   componentDidMount(){
     API.getCategories().then(response => {
       this.setState({categories: response});
-      console.log("cat", this.state.categories);
     });
   }
 
