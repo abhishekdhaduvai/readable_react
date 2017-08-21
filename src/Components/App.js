@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
+import { Route } from 'react-router-dom';
+import NavBarDrawer from './NavBarDrawer';
+import * as API from '../API.js';
 
 class App extends Component {
+
+  state = {
+    categories: [],
+  }
+
+  componentDidMount(){
+    API.getCategories().then(response => {
+      this.setState({categories: response});
+      console.log("cat", this.state.categories);
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <NavBarDrawer categories={this.state.categories}/>
+        <Route exact path="/" render={() => (
+          <h1>Hello World</h1>
+        )} />
       </div>
     );
   }
