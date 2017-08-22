@@ -1,7 +1,7 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import NavBar from './NavBar';
+import NavBar from './Utils/NavBar';
 import Divider from 'material-ui/Divider';
 
 export default class NavBarDrawer extends React.Component {
