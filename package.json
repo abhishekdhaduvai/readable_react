@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "material-ui": "^0.19.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -16,5 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   }
 }

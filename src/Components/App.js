@@ -4,6 +4,8 @@ import NavBarDrawer from './NavBarDrawer';
 import SubReadable from './SubReadable';
 import * as API from '../API.js';
 
+import { connect } from 'react-redux';
+
 class App extends Component {
 
   state = {
@@ -19,6 +21,7 @@ class App extends Component {
 
   render() {
     const {categories} = this.state;
+
     return (
       <div className="App">
 
@@ -26,11 +29,11 @@ class App extends Component {
 
         <Route exact path="/" render={() => (
           <SubReadable title = "All" />
-        )} /> 
+        )} />
 
         <Route path="/react" render={() => (
           <SubReadable title = "react" />
-        )} /> 
+        )} />
 
         <Route path="/redux" render={() => (
           <SubReadable title = "redux" />
@@ -45,4 +48,12 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps ({ selectedSub }) {
+  return {
+    
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(App)

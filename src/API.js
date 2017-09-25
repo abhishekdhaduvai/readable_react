@@ -25,3 +25,15 @@ export const getPostsByCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
+
+export const voteOnPost = (postId, vote) => {
+  var body = {"option": vote.toString()}
+  fetch(`${api}/posts/${postId}`, { 
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+}

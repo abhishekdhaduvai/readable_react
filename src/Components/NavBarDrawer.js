@@ -4,20 +4,23 @@ import MenuItem from 'material-ui/MenuItem';
 import NavBar from './Utils/NavBar';
 import Divider from 'material-ui/Divider';
 
-export default class NavBarDrawer extends React.Component {
+import { connect } from 'react-redux';
+
+class NavBarDrawer extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {open: false};
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle = () => {
+    this.setState({open: !this.state.open})
+  }
 
   handleClose = () => this.setState({open: false});
 
   render() {
     const {categories} = this.props;
-
     return (
       <div>
 
@@ -49,3 +52,20 @@ export default class NavBarDrawer extends React.Component {
     );
   }
 }
+
+function mapStateToProps () {
+  return {
+    
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBarDrawer)

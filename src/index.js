@@ -9,33 +9,26 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import thunk from 'redux-thunk';
 
-const logger = store => next => action => {
-  console.group(action.type)
-  console.info('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd(action.type)
-  return result
-}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
   reducer,
   composeEnhancers(
-	  applyMiddleware(logger)
+	  applyMiddleware(thunk)
   )
 )
 
-ReactDOM.render(
-	<BrowserRouter>
-		<MuiThemeProvider>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</MuiThemeProvider>
-	</BrowserRouter>, 
+ReactDOM.render(	
+  <Provider store={store}>
+    <BrowserRouter>
+      <MuiThemeProvider>			
+          <App />			
+      </MuiThemeProvider>
+      </BrowserRouter>
+    </Provider>,	
 	document.getElementById('root')
 );
 registerServiceWorker();

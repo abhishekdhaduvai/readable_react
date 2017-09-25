@@ -1,88 +1,45 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import {
-  ADD_RECIPE,
-  REMOVE_FROM_CALENDAR,
-} from '../actions'
+const initialState = {
+  "loading": true,
+  "posts":[],
+  "activeSub": "/"
+}
 
-function food (state = {}, action) {
-  switch (action.type) {
-    case ADD_RECIPE :
-      const { recipe } = action
-
+function site(state=initialState, action){
+  switch (action.type){
+    case "FETCH_POSTS": {
       return {
         ...state,
-        [recipe.label]: recipe,
+        loading: false,
+        posts: action.payload
       }
-    default :
+    }
+    default:
       return state
   }
 }
 
-const initialCalendarState = {
-  sunday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  monday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  tuesday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  wednesday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  thursday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  friday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-  saturday: {
-    breakfast: null,
-    lunch: null,
-    dinner: null,
-  },
-}
+// function castVote (state={}, action){
+//   switch (action.type) {
+//     case VOTE:
+//       const { vote, postId } = action
+//       if(vote > 0) {
+//         API.voteOnPost(postId, "upVote");
+//       }
+//       else {
+//         API.voteOnPost(postId, "downVote");
+//       }
+//       return {
+//         ...state,
+//         // [post.voteScore]: post.voteScore + vote
+//       }
 
-function calendar (state = initialCalendarState, action) {
-  const { day, recipe, meal } = action
-
-  switch (action.type) {
-    case ADD_RECIPE :
-      return {
-        ...state,
-        [day]: {
-          ...state[day],
-          [meal]: recipe.label,
-        }
-      }
-    case REMOVE_FROM_CALENDAR :
-      return {
-        ...state,
-        [day]: {
-          ...state[day],
-          [meal]: null,
-        }
-      }
-    default :
-      return state
-  }
-}
+//     default:
+//       return state
+//   }
+// }
 
 export default combineReducers({
-  food,
-  calendar,
+  site
 })

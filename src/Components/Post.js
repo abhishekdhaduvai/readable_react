@@ -1,15 +1,19 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import Timestamp from './Utils/Timestamp';
-import Votes from './Votes';
+
+import { connect } from 'react-redux';
+import {  } from '../actions'
 
 class Post extends React.Component{
     render() {
-        const {post} = this.props;
-        console.log("posts ", post);
+        const { post } = this.props;
         return (
             <div className="post">
-                <Votes score={post.voteScore} />
+                <div className="votes">
+                    <div className="voteButton">Up</div>
+                    <div className="voteScore">{post.voteScore}</div>
+                    <div className="voteButton">Dn</div>
+                </div>
                 <div className="post-info">
                     <div className="post-title">
                         <a href="comments/">{post.title}</a>
@@ -26,4 +30,19 @@ class Post extends React.Component{
     }
 }
 
-export default Post;
+function mapStateToProps () {
+  return {
+
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Post)
