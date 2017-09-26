@@ -8,7 +8,12 @@ import { fetchPosts } from '../actions'
 class SubReadable extends Component {
 
     componentWillMount(){
-        this.props.fetchPosts()
+        if(this.props.title === "All"){
+            this.props.fetchPosts();
+        }
+        else {
+            this.props.fetchPosts(this.props.title)
+        }
     }
 
     render() {
@@ -48,7 +53,7 @@ function mapStateToProps ({ site }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchPosts: (category) => dispatch(fetchPosts(category))
   }
 }
 

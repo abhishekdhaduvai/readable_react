@@ -15,30 +15,29 @@ function site(state=initialState, action){
         posts: action.payload
       }
     }
+
+    case "UP_VOTE": {
+      const temp = state.posts;
+      for(var i=0; i<temp.length; i++){
+        if(temp[i].id === action.payload.id){
+          temp[i].voteScore = action.payload.voteScore;
+        }
+      }
+      return {
+        ...state,
+        posts: temp
+      }
+    }
+    case "CHANGE_SUB": {
+      return {
+        ...state,
+        activeSub: action.payload
+      }
+    }
     default:
       return state
   }
 }
-
-// function castVote (state={}, action){
-//   switch (action.type) {
-//     case VOTE:
-//       const { vote, postId } = action
-//       if(vote > 0) {
-//         API.voteOnPost(postId, "upVote");
-//       }
-//       else {
-//         API.voteOnPost(postId, "downVote");
-//       }
-//       return {
-//         ...state,
-//         // [post.voteScore]: post.voteScore + vote
-//       }
-
-//     default:
-//       return state
-//   }
-// }
 
 export default combineReducers({
   site

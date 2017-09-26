@@ -13,22 +13,49 @@ const headers = {
 }
 
 export const FETCH_POSTS = 'FETCH_POSTS'
-export const VOTE = 'VOTE'
+export const UP_VOTE = 'UP_VOTE'
+export const DOWN_VOTE = 'DOWN_VOTE'
 export const CHANGE_SUB = 'CHANGE_SUB'
 
-export function castVote ({postId, vote}) {
-  return {
-    type: VOTE,
-    postId,
-    vote
+export function fetchPosts (category) {
+  return function(dispatch){
+    if(category === undefined){
+      axios.get(`${api}/posts`, { headers })
+      .then((response) => {
+        dispatch({type: FETCH_POSTS, payload: response.data})
+      })
+    }
+    else {
+      axios.get(`${api}/${category}/posts`, { headers })
+      .then((response) => {
+        dispatch({type: FETCH_POSTS, payload: response.data})
+      })
+    }
   }
 }
 
-export function fetchPosts () {
+export function upVote(id){
   return function(dispatch){
-    axios.get(`${api}/posts`, { headers })
+    const body = {"option": "upVote"}
+    axios.post(`${api}/posts/${id}`, body, {headers})
     .then((response) => {
-      dispatch({type: FETCH_POSTS, payload: response.data})
+      dispatch({type: UP_VOTE, payload: response.data})
     })
+  }
+}
+
+export function downVote(id){
+  return function(dispatch){
+    const body = {"option": "downVote"}
+    axios.post(`${api}/posts/${id}`, body, {headers})
+    .then((response) => {
+      dispatch({type: DOWN_VOTE, payload: response.data})
+    })
+  }
+}
+
+export function changeSub(data){
+  return function(dispatch){
+    dispatch({type: CHANGE_SUB, payload: data})
   }
 }
