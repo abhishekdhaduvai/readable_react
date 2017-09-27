@@ -12,13 +12,16 @@ const headers = {
   'Authorization': token
 }
 
+export const LOADING = 'LOADING'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const UP_VOTE = 'UP_VOTE'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const CHANGE_SUB = 'CHANGE_SUB'
+export const CHANGE_SORT = 'CHANGE_SORT'
 
 export function fetchPosts (category) {
   return function(dispatch){
+    dispatch({type: LOADING})
     if(category === undefined){
       axios.get(`${api}/posts`, { headers })
       .then((response) => {
@@ -51,6 +54,12 @@ export function downVote(id){
     .then((response) => {
       dispatch({type: DOWN_VOTE, payload: response.data})
     })
+  }
+}
+
+export function changeSort(sort){
+  return function(dispatch){
+    dispatch({type: CHANGE_SORT, payload: sort})
   }
 }
 

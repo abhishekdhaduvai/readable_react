@@ -22,6 +22,16 @@ const defaultData = {
     category: 'redux',
     voteScore: -5,
     deleted: false
+  },
+  "6ni6oasgm7mf1p33lnez": {
+    id: '6ni6oasgm7mf1p33lnez',
+    timestamp: 1506488860000,
+    title: 'This is Post #3',
+    body: 'This is the first post on this sub',
+    author: 'thingone',
+    category: 'udacity',
+    voteScore: 5,
+    deleted: false
   }
 }
 

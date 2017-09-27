@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import Sort from './Sort';
 import Loading from './Utils/Loading';
+import sortBy from 'sort-by';
 
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions'
+import { fetchPosts } from '../actions';
 
 class SubReadable extends Component {
 
@@ -18,7 +20,18 @@ class SubReadable extends Component {
 
     render() {
         const { title, site } = this.props;
-        const posts = site.posts;
+        const { posts } = site;
+        
+        if(site.sortBy === "Score"){
+            posts.sort(sortBy('-voteScore'))
+        }
+        else if(site.sortBy === "Controversial"){
+            posts.sort(sortBy('voteScore'))
+        }
+        else {
+            posts.sort(sortBy('-timestamp'))
+        }
+
         return (
             <div>
                 {site.loading && (
@@ -26,7 +39,11 @@ class SubReadable extends Component {
                 )}
                 {!site.loading && (
                     <div>
-                        <div>Welcome to {title}</div>
+                        <div className="welcome">
+                            <span className="welcome-to-sub">Welcome to {title}</span>
+                            <vr />
+                            <span className="sort">Sort by <Sort /></span>
+                        </div>
                         <div>
                             {posts.map(post => (
                                 <Post key={post.id} post={post}/>

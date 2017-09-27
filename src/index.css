@@ -66,3 +66,39 @@ a {
   padding: 5em;
 }
 
+.sort-text {
+  font-style: normal;
+  font-size: small;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  padding: 5px;
+}
+
+.sort-text:hover {
+  cursor: pointer;
+}
+
+.sort-menu-item {
+  font-size: small !important;
+  min-height: 35px !important;
+  line-height: 35px !important;
+}
+
+.welcome-to-sub {
+  font-size: xx-large;
+  color: #757575;
+}
+
+.sort {
+  color: #757575;
+  font-size: x-large
+}
+
+.welcome {
+  padding: 1em;
+}
+
+vr {
+  border-right: 1px solid black;
+  margin: 0px 10px;
+  font-size: xx-large
+}
