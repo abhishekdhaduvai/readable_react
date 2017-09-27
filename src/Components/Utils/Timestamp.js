@@ -9,8 +9,10 @@ class Timestamp extends React.Component {
 
     render() {
         const { time } = this.props;
-        var mins = Math.floor(time/(1000*60));
-        var hours = Math.floor(time/(1000*60*60));
+        const current_time = Date.now();
+        const time_passed = current_time - time;
+        var mins = Math.floor(time_passed/(1000*60));
+        var hours = Math.floor(time_passed/(1000*60*60));
         var days = Math.floor(hours/24);
         var months = Math.floor(days/30);
         var years = Math.floor(months/12);
