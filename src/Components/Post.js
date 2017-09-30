@@ -1,75 +1,21 @@
 import React from 'react';
+import Votes from './Votes'
 import Timestamp from './Utils/Timestamp';
 
 import { connect } from 'react-redux';
-import { upVote, downVote } from '../actions'
+import { } from '../actions'
 
 class Post extends React.Component{
 
     state = {
-        post: this.props.post,
-        voted: ""
-    }
-
-    upVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState(post => {
-                this.state.post.voteScore++;
-            });
-            this.setState({voted: "upVoted"})
-            this.props.upVote(id);
-        }
-        else if (this.state.voted === "downVoted"){
-            this.setState(post => {
-                this.state.post.voteScore = this.state.post.voteScore + 2;
-            });
-            this.setState({voted: "upVoted"})
-            this.props.upVote(id);
-            this.props.upVote(id);
-        }
-        else if (this.state.voted === "upVoted") {
-            this.setState(post => {
-                this.state.post.voteScore--;
-            });
-            this.setState({voted: ""})
-            this.props.downVote(id);
-        }
-    }
-
-    downVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState(post => {
-                this.state.post.voteScore--;
-            });
-            this.setState({voted: "downVoted"})
-            this.props.downVote(id);
-        }
-        else if(this.state.voted === "upVoted"){
-            this.setState(post => {
-                this.state.post.voteScore = this.state.post.voteScore - 2;
-            });
-            this.setState({voted: "downVoted"})
-            this.props.downVote(id);
-            this.props.downVote(id);
-        }
-        else if(this.state.voted === "downVoted"){
-            this.setState(post => {
-                this.state.post.voteScore++;
-            });
-            this.setState({voted: ""})
-            this.props.upVote(id);
-        }
+        post: this.props.post
     }
 
     render() {
         const { post } = this.state;
         return (
             <div className="post">
-                <div className="votes">
-                    <div className="voteButton" onClick={() => this.upVote(post.id)}>Up</div>
-                    <div className="voteScore">{post.voteScore}</div>
-                    <div className="voteButton" onClick={() => this.downVote(post.id)}>Dn</div>
-                </div>
+                <Votes post={post} />
                 <div className="post-info">
                     <div className="post-title">
                         <a href="comments/">{post.title}</a>
@@ -94,8 +40,7 @@ function mapStateToProps () {
 
 function mapDispatchToProps (dispatch) {
   return {
-    upVote:(id) => dispatch(upVote(id)),
-    downVote:(id) => dispatch(downVote(id))
+
   }
 }
 

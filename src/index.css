@@ -52,6 +52,17 @@ a {
 
 .voteButton {
   padding: 0.2em;
+  max-height: 20px;
+  overflow: hidden;
+}
+
+.voteButton img:hover {
+  cursor: pointer;
+}
+
+.downvote {
+  position: relative;
+  bottom: 25px;
 }
 
 .voteScore {

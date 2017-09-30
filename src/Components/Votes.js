@@ -1,16 +1,136 @@
 import React, { Component } from 'react';
+import notVoted from './Utils/icons/not-voted.png';
+import vote from './Utils/icons/voted.png';
+
+import { connect } from 'react-redux';
+import { upVote, downVote } from '../actions'
 
 class Votes extends Component {
+
+    state = {
+        post: this.props.post,
+        voted: "",
+        upvoteIcon: notVoted,
+        downvoteIcon: notVoted
+    }
+
+    toggleUpvote = () => {
+        if(this.state.upvoteIcon === notVoted){
+            this.setState({upvoteIcon: vote});
+            this.setState({downvoteIcon: notVoted});
+        }
+        else
+            this.setState({upvoteIcon: notVoted})
+    }
+
+    toggleDownVote = () => {
+        if(this.state.downvoteIcon === notVoted){
+            this.setState({downvoteIcon: vote});
+            this.setState({upvoteIcon: notVoted});
+        }
+        else
+            this.setState({downvoteIcon: notVoted})
+    }
+
+    upVote = (id) => {
+        if(this.state.voted === ""){
+            this.setState(post => {
+                this.state.post.voteScore++;
+            });
+            this.setState({voted: "upVoted"})
+            this.props.upVote(id);
+            this.toggleUpvote();
+        }
+        else if (this.state.voted === "downVoted"){
+            this.setState(post => {
+                this.state.post.voteScore = this.state.post.voteScore + 2;
+            });
+            this.setState({voted: "upVoted"})
+            this.props.upVote(id);
+            this.props.upVote(id);
+            this.toggleUpvote();
+        }
+        else if (this.state.voted === "upVoted") {
+            this.setState(post => {
+                this.state.post.voteScore--;
+            });
+            this.setState({voted: ""})
+            this.props.downVote(id);
+            this.toggleUpvote();
+        }
+    }
+
+    downVote = (id) => {
+        if(this.state.voted === ""){
+            this.setState(post => {
+                this.state.post.voteScore--;
+            });
+            this.setState({voted: "downVoted"})
+            this.props.downVote(id);
+            this.toggleDownVote();
+        }
+        else if(this.state.voted === "upVoted"){
+            this.setState(post => {
+                this.state.post.voteScore = this.state.post.voteScore - 2;
+            });
+            this.setState({voted: "downVoted"})
+            this.props.downVote(id);
+            this.props.downVote(id);
+            this.toggleDownVote();
+        }
+        else if(this.state.voted === "downVoted"){
+            this.setState(post => {
+                this.state.post.voteScore++;
+            });
+            this.setState({voted: ""})
+            this.props.upVote(id);
+            this.toggleDownVote();
+        }
+    }
+
     render() {
-        const {score} = this.props;
+        const {post} = this.props;
+
         return (
             <div className="votes">
-                <div className="voteButton">Up</div>
-                <div className="voteScore">{score}</div>
-                <div className="voteButton">Dn</div>
+                <div className="voteButton">
+                    <img 
+                        src={this.state.upvoteIcon} 
+                        width="20px"
+                        height="45px"
+                        alt="Dn"
+                        className="upvote"
+                        onClick={() => this.upVote(post.id)}/>
+                </div>
+                <div className="voteScore">{post.voteScore}</div>
+                <div className="voteButton">
+                    <img 
+                        src={this.state.downvoteIcon} 
+                        width="20px"
+                        height="45px"
+                        alt="Dn"
+                        className="downvote"
+                        onClick={() => this.downVote(post.id)}/>
+                </div> 
             </div>
         )
     }
 }
 
-export default Votes;
+function mapStateToProps () {
+  return {
+
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    upVote:(id) => dispatch(upVote(id)),
+    downVote:(id) => dispatch(downVote(id))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Votes)
