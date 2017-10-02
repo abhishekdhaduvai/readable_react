@@ -7,12 +7,8 @@ import { } from '../actions'
 
 class Post extends React.Component{
 
-    state = {
-        post: this.props.post
-    }
-
     render() {
-        const { post } = this.state;
+        const { post } = this.props;
         return (
             <div className="post">
                 <Votes post={post} />

@@ -34,9 +34,6 @@ class Votes extends Component {
 
     upVote = (id) => {
         if(this.state.voted === ""){
-            this.setState(post => {
-                this.state.post.voteScore++;
-            });
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
             this.toggleUpvote();
@@ -44,19 +41,12 @@ class Votes extends Component {
         else if (this.state.voted === "downVoted"){
             let temp = Object.assign({}, this.state.post);
             temp.voteScore = temp.voteScore + 2;
-            this.setState(post => {
-                this.state.post.voteScore++;
-                this.state.post.voteScore++;
-            });
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
             this.props.upVote(id);
             this.toggleUpvote();
         }
         else if (this.state.voted === "upVoted") {
-            this.setState(post => {
-                this.state.post.voteScore--;
-            });
             this.setState({voted: ""})
             this.props.downVote(id);
             this.toggleUpvote();
@@ -65,26 +55,17 @@ class Votes extends Component {
 
     downVote = (id) => {
         if(this.state.voted === ""){
-            this.setState(post => {
-                this.state.post.voteScore--;
-            });
             this.setState({voted: "downVoted"})
             this.props.downVote(id);
             this.toggleDownVote();
         }
         else if(this.state.voted === "upVoted"){
-            this.setState(post => {
-                this.state.post.voteScore = this.state.post.voteScore - 2;
-            });
             this.setState({voted: "downVoted"})
             this.props.downVote(id);
             this.props.downVote(id);
             this.toggleDownVote();
         }
         else if(this.state.voted === "downVoted"){
-            this.setState(post => {
-                this.state.post.voteScore++;
-            });
             this.setState({voted: ""})
             this.props.upVote(id);
             this.toggleDownVote();
@@ -93,7 +74,6 @@ class Votes extends Component {
 
     render() {
         const {post} = this.props;
-
         return (
             <div className="votes">
                 <div className="voteButton">
@@ -122,7 +102,6 @@ class Votes extends Component {
 
 function mapStateToProps () {
   return {
-
   }
 }
 

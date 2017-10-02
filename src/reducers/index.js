@@ -40,10 +40,18 @@ function site(state=initialState, action){
     }
 
     case "UP_VOTE": {
-      let temp = Object.assign({},action.payload);
-      temp.voteScore++;
       return {
-        ...state
+        ...state,
+        posts: state.posts.map(post => 
+          post.id === action.payload.id ? { ...post, voteScore: action.payload.voteScore}: post)
+      }
+    }
+    
+    case "DOWN_VOTE": {
+      return {
+        ...state,
+        posts: state.posts.map(post => 
+          post.id === action.payload.id ? { ...post, voteScore: action.payload.voteScore}: post)
       }
     }
 
