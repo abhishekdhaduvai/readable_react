@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import NavBarDrawer from './NavBarDrawer';
 import SubReadable from './SubReadable';
+import NewPost from './NewPost';
 import * as API from '../API.js';
 
 import { connect } from 'react-redux';
@@ -31,16 +32,20 @@ class App extends Component {
           <SubReadable title = "All" />
         )} />
 
-        <Route path="/react" render={() => (
+        <Route exact path="/react" render={() => (
           <SubReadable title = "react" />
         )} />
 
-        <Route path="/redux" render={() => (
+        <Route exact path="/redux" render={() => (
           <SubReadable title = "redux" />
         )} />
 
-        <Route path="/udacity" render={() => (
+        <Route exact path="/udacity" render={() => (
           <SubReadable title = "udacity" />
+        )} />
+
+        <Route exact path="/new-post" render={() => (
+          <NewPost />
         )} />        
 
       </div>

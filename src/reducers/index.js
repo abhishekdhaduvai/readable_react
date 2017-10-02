@@ -39,6 +39,14 @@ function site(state=initialState, action){
       }
     }
 
+    case "UP_VOTE": {
+      let temp = Object.assign({},action.payload);
+      temp.voteScore++;
+      return {
+        ...state
+      }
+    }
+
     default:
       return state
   }

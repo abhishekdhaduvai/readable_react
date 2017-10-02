@@ -42,8 +42,11 @@ class Votes extends Component {
             this.toggleUpvote();
         }
         else if (this.state.voted === "downVoted"){
+            let temp = Object.assign({}, this.state.post);
+            temp.voteScore = temp.voteScore + 2;
             this.setState(post => {
-                this.state.post.voteScore = this.state.post.voteScore + 2;
+                this.state.post.voteScore++;
+                this.state.post.voteScore++;
             });
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
