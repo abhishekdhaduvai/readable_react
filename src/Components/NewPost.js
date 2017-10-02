@@ -59,7 +59,15 @@ class NewPost extends Component {
             category: this.state.category
         }
 
-        axios.post(`${api}/posts`, payload, { headers });
+        axios.post(`${api}/posts`, payload, { headers })
+        .then(response => {
+            this.setState({
+                username:"",
+                title:"",
+                body:"",
+                category:""
+            });
+        })
     }
 
     render(){
