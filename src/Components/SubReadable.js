@@ -11,17 +11,18 @@ import { fetchPosts } from '../actions';
 class SubReadable extends Component {
 
     componentWillMount(){
-        if(this.props.title === "All"){
+        if(window.location.pathname === "/"){
             this.props.fetchPosts();
         }
         else {
-            this.props.fetchPosts(this.props.title)
+            this.props.fetchPosts(window.location.pathname.slice(1))
         }
     }
 
     render() {
-        const { title, site } = this.props;
+        const { site } = this.props;
         const { posts } = site;
+        const title = window.location.pathname.slice(1) ? window.location.pathname.slice(1) : "All"
         
         if(site.sortBy === "Score"){
             posts.sort(sortBy('-voteScore'))
@@ -52,7 +53,8 @@ class SubReadable extends Component {
                                         <Post key={post.id} post={post}/>
                                     ))}
 
-                                    {posts.length ===0 && (
+                                    {(posts.length === 0 || 
+                                    posts.filter(post => post.deleted).length === posts.length) && (
                                         <div className="no-posts">No posts here</div>
                                     )}
                                 </div>
@@ -61,12 +63,12 @@ class SubReadable extends Component {
                                 <RaisedButton 
                                     label="Submit a new Post" 
                                     secondary={true}
-                                    href="new-post"
+                                    href="create/new-post"
                                     className="add-content-button" />
                                 <RaisedButton 
                                     label="Create a new Sub" 
                                     secondary={true}
-                                    href="new-post"
+                                    href="create/new-sub"
                                     className="add-content-button" />
                             </div>
                         </div>

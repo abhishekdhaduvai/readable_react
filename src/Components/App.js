@@ -29,24 +29,20 @@ class App extends Component {
         <NavBarDrawer categories={categories}/>
 
         <Route exact path="/" render={() => (
-          <SubReadable title = "All" />
+          <SubReadable />
         )} />
 
-        <Route exact path="/react" render={() => (
-          <SubReadable title = "react" />
+        <Route exact path="/:category" render={() => (
+          <SubReadable />
         )} />
 
-        <Route exact path="/redux" render={() => (
-          <SubReadable title = "redux" />
-        )} />
-
-        <Route exact path="/udacity" render={() => (
-          <SubReadable title = "udacity" />
-        )} />
-
-        <Route exact path="/new-post" render={() => (
+        <Route exact path="/create/new-post" render={() => (
           <NewPost />
-        )} />        
+        )} /> 
+
+        <Route exact path="/create/new-sub" render={() => (
+          <NewPost />
+        )} />     
 
       </div>
     );
