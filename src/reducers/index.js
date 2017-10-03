@@ -24,6 +24,14 @@ function site(state=initialState, action){
         posts: action.payload
       }
     }
+
+    case "DELETE_POST": {
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.id === action.payload ? { ...post, deleted: true } : post)
+      }
+    }
     
     case "CHANGE_SUB": {
       return {

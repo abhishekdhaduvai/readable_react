@@ -14,12 +14,13 @@ const headers = {
 
 export const LOADING = 'LOADING'
 export const FETCH_POSTS = 'FETCH_POSTS'
+export const DELETE_POST = 'DELETE_POST'
 export const UP_VOTE = 'UP_VOTE'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const CHANGE_SUB = 'CHANGE_SUB'
 export const CHANGE_SORT = 'CHANGE_SORT'
 
-export function fetchPosts (category) {
+export function fetchPosts(category) {
   return function(dispatch){
     dispatch({type: LOADING})
     if(category === undefined){
@@ -34,6 +35,15 @@ export function fetchPosts (category) {
         dispatch({type: FETCH_POSTS, payload: response.data})
       })
     }
+  }
+}
+
+export function deletePost(id) {
+  return function(dispatch){
+    axios.delete(`${api}/posts/${id}`, {headers})
+    .then(response => {
+      dispatch({type: DELETE_POST, payload: id})
+    })
   }
 }
 

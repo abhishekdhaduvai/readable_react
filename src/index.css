@@ -39,6 +39,18 @@ a {
 .comments-button {
     font-size: smaller;
     font-weight: bold;
+    display: inline-block;
+}
+
+.delete-button {
+  display: inline-block;
+  margin-left: 1em;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.delete-button:hover{
+  cursor: pointer;
 }
 
 .votes {

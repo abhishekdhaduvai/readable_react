@@ -8,7 +8,6 @@ import { upVote, downVote } from '../actions'
 class Votes extends Component {
 
     state = {
-        post: this.props.post,
         voted: "",
         upvoteIcon: notVoted,
         downvoteIcon: notVoted
@@ -39,8 +38,6 @@ class Votes extends Component {
             this.toggleUpvote();
         }
         else if (this.state.voted === "downVoted"){
-            let temp = Object.assign({}, this.state.post);
-            temp.voteScore = temp.voteScore + 2;
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
             this.props.upVote(id);
@@ -81,7 +78,7 @@ class Votes extends Component {
                         src={this.state.upvoteIcon} 
                         width="20px"
                         height="45px"
-                        alt="Dn"
+                        alt="Up"
                         className="upvote"
                         onClick={() => this.upVote(post.id)}/>
                 </div>
