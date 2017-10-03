@@ -41,7 +41,7 @@ class NavBarDrawer extends React.Component {
             
             {categories.map(category => (
               <div key={category.path}>
-                <MenuItem href={category.path}>{category.name}</MenuItem>
+                <MenuItem href={`/${category.path}`}>{category.name}</MenuItem>
                 <Divider />
               </div>
             ))}
