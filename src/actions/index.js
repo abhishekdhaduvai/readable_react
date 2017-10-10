@@ -25,6 +25,8 @@ export const CHANGE_COMMENTS_SORT = 'CHANGE_COMMENTS_SORT'
 export const POST_COMMENT = 'POST_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 export function fetchPosts(category) {
   return function(dispatch){
@@ -129,6 +131,24 @@ export function downVoteComment(id){
     axios.post(`${api}/comments/${id}`, body, {headers})
     .then((response) => {
       dispatch({type: DOWN_VOTE_COMMENT, payload: response.data})
+    })
+  }
+}
+
+export function updateComment(comment){
+  return function(dispatch){
+    axios.put(`${api}/comments/${comment.id}`, comment, {headers})
+    .then(response => {
+      dispatch({type: UPDATE_COMMENT, payload: comment})
+    })
+  }
+}
+
+export function deleteComment(id){
+  return function(dispatch){
+    axios.delete(`${api}/comments/${id}`, {headers})
+    .then(response => {
+      dispatch({type: DELETE_COMMENT, payload: id})
     })
   }
 }

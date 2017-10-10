@@ -113,6 +113,25 @@ function details(state=commentState, action) {
       }
     }
 
+    case "UPDATE_COMMENT": {
+      return {
+        ...state,
+        comments: state.comments.map(comment => 
+          comment.id === action.payload.id ? {
+            ...comment, 
+            timestamp: action.payload.timestamp,
+            body: action.payload.body} : comment)
+      }
+    }
+
+    case "DELETE_COMMENT": {
+      return {
+        ...state,
+        comments: state.comments.map(comment => 
+          comment.id === action.payload.id ? {...comment, deleted: true}: comment)
+      }
+    }
+
     default: {
       return {
         ...state

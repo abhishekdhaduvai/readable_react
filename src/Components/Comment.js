@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment } from '../actions'
+import { upVoteComment, downVoteComment, deleteComment, updateComment } from '../actions'
 
 class Comment extends Component {
 
@@ -83,28 +83,20 @@ class Comment extends Component {
         }
     }
 
-    confirmDelete = () => {
-        this.setState({open: true})
-    }
-
     deleteComment = () => {
         console.log("deleted ", this.props.post)
+        this.props.deleteComment(this.props.post.id)
+        window.location.reload()
     }
 
-    editComment = () => {
-        this.setState({edit: true})
-    }
-
-    updateComment = (e) => {
-        this.setState({comment: e.target.value})
-    }
-
-    postComment = () => {
-
-    }
-
-    cancelEdit = () => {
-        this.setState({edit: false})
+    updateComment = () => {
+        let updatedComment = {
+            id: this.props.post.id,
+            body: this.state.comment,
+            timestamp: Date.now()
+        }
+        this.props.updateComment(updatedComment)
+        this.setState({edit:false})
     }
 
     render() {
@@ -168,9 +160,9 @@ class Comment extends Component {
                             <div>
                                 <span>{post.body}</span>
                                 <div style={{fontWeight: "bold", fontSize: "smaller",color: "grey", marginTop: "5px"}}>
-                                    <a onClick={() => (this.confirmDelete())}>delete</a>
+                                    <a onClick={() => (this.setState({open: true}))}>delete</a>
                                     <span style={{margin: "0px 5px"}}/>
-                                    <a onClick={() => (this.editComment())}>edit</a>
+                                    <a onClick={() => (this.setState({edit: true}))}>edit</a>
                                 </div>
                             </div>
                         }
@@ -180,10 +172,10 @@ class Comment extends Component {
                                     rows="4" 
                                     cols="50"
                                     value={this.state.comment}
-                                    onChange = {e => (this.updateComment(e))} />
+                                    onChange = {e => (this.setState({comment: e.target.value}))} />
                                 <br />
-                                <button onClick={() => this.postComment()}>Update</button>
-                                <button onClick={() => this.cancelEdit()}>Cancel</button>
+                                <button onClick={() => this.updateComment()}>Update</button>
+                                <button onClick={() => this.setState({edit: false})}>Cancel</button>
                             </span>    
                         }
                     </div>
@@ -208,7 +200,9 @@ function mapStateToProps () {
 function mapDispatchToProps (dispatch) {
   return {
     upVoteComment:(id) => dispatch(upVoteComment(id)),
-    downVoteComment:(id) => dispatch(downVoteComment(id))
+    downVoteComment:(id) => dispatch(downVoteComment(id)),
+    updateComment:(comment) => dispatch(updateComment(comment)),
+    deleteComment:(id) => dispatch(deleteComment(id))
   }
 }
 
