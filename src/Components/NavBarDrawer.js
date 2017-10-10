@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import NavBar from './Utils/NavBar';
@@ -7,6 +8,10 @@ import Divider from 'material-ui/Divider';
 import { connect } from 'react-redux';
 
 class NavBarDrawer extends React.Component {
+
+  PropTypes = {
+    categories: PropTypes.object.isRequired,
+  }
 
   constructor(props) {
     super(props);

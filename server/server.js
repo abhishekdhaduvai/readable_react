@@ -178,6 +178,19 @@ app.post('/posts', bodyParser.json(), (req, res) => {
       )
 })
 
+app.post('/categories', bodyParser.json(), (req, res) => {
+    categories.add(req.token, req.body)
+      .then(
+          (data) => res.send(data),
+          (error) => {
+              console.error(error)
+              res.status(500).send({
+                 error: 'There was an error.'
+          })
+        }
+      )
+})
+
 app.get('/posts/:id', (req, res) => {
     posts.get(req.token, req.params.id)
       .then(

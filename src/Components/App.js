@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import NavBarDrawer from './NavBarDrawer';
 import SubReadable from './SubReadable';
 import NewPost from './NewPost';
+import Comments from './Comments';
 import * as API from '../API.js';
 
 import { connect } from 'react-redux';
@@ -34,6 +35,10 @@ class App extends Component {
 
         <Route exact path="/:category" render={() => (
           <SubReadable />
+        )} /> 
+
+        <Route exact path="/comments/:id" render={() => (
+          <Comments />
         )} />
 
         <Route exact path="/create/new-post" render={() => (

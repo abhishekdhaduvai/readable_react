@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Post from './Post';
 import Sort from './Sort';
 import Loading from './Utils/Loading';
@@ -6,7 +7,7 @@ import sortBy from 'sort-by';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPosts, changeSort } from '../actions';
 
 class SubReadable extends Component {
 
@@ -19,11 +20,16 @@ class SubReadable extends Component {
         }
     }
 
+    changeSort = (sort) => {
+        this.props.changeSort(sort);
+    }
+
     render() {
+
         const { site } = this.props;
         const { posts } = site;
         const title = window.location.pathname.slice(1) ? window.location.pathname.slice(1) : "All"
-        
+
         if(site.sortBy === "Score"){
             posts.sort(sortBy('-voteScore'))
         }
@@ -44,7 +50,7 @@ class SubReadable extends Component {
                         <div className="welcome">
                             <span className="welcome-to-sub">Welcome to {title}</span>
                             <vr />
-                            <span className="sort">Sort by <Sort /></span>
+                            <span className="sort">Sort by <Sort sort={site.sortBy} changeSort={this.changeSort}/></span>
                         </div>
                         <div className="subreadable-content">
                             <div className="subreadable-main">
@@ -88,7 +94,8 @@ function mapStateToProps ({ site }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchPosts: (category) => dispatch(fetchPosts(category))
+    fetchPosts: (category) => dispatch(fetchPosts(category)),
+    changeSort: (sort) => dispatch(changeSort(sort))
   }
 }
 

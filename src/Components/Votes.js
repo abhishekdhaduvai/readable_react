@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import notVoted from './Utils/icons/not-voted.png';
 import vote from './Utils/icons/voted.png';
 

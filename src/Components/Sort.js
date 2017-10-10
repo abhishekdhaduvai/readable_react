@@ -1,10 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-
-import { connect } from 'react-redux';
-import { changeSort } from '../actions';
 
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -48,7 +46,7 @@ class Sort extends React.Component {
         <span 
             className="sort-dropdown"
             onTouchTap={this.handleTouchTap}>
-            <i className="material-icons dropdown-content sort-text">{this.props.site.sortBy}</i>
+            <i className="material-icons dropdown-content sort-text">{this.props.sort}</i>
         </span>
 
         <Popover
@@ -79,19 +77,4 @@ class Sort extends React.Component {
   }
 }
 
-function mapStateToProps ({ site }) {
-  return {
-    site
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    changeSort: (sort) => dispatch(changeSort(sort))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sort)
+export default Sort

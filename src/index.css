@@ -2,10 +2,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: #424242
 }
 
 a {
   text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 .drawer-heading {
@@ -28,6 +33,18 @@ a {
 
 .post-title {
   font-size: x-large;
+}
+
+.post-info {
+  width: 100%;
+  margin-right: 2em;
+}
+
+.post-body {
+  padding: 1em;
+  background: #EEEEEE;
+  border-radius: 2px;
+  margin-top: 10px;
 }
 
 .post-details {
@@ -168,4 +185,25 @@ vr {
 .mandatory::after{
   content: "*";
   color: red;
+}
+
+.divider {
+  border: 1px solid #424242;
+}
+
+.comments {
+  padding: 0 2em;
+}
+
+.comment-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 5px;
+  padding-bottom: 0px;
+  margin: 15px 0px;
+}
+
+.comment-input {
+  margin: 10px 0px;
+  border: 1px solid grey;
 }

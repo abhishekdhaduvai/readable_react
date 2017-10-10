@@ -3,8 +3,13 @@ import { combineReducers } from 'redux';
 const initialState = {
   "loading": true,
   "posts":[],
-  "activeSub": "/",
   "sortBy":"Score"
+}
+
+const commentState = {
+  "post":{},
+  "sortBy": "Score",
+  "comments":[],
 }
 
 function site(state=initialState, action){
@@ -30,13 +35,6 @@ function site(state=initialState, action){
         ...state,
         posts: state.posts.map(post =>
           post.id === action.payload ? { ...post, deleted: true } : post)
-      }
-    }
-    
-    case "CHANGE_SUB": {
-      return {
-        ...state,
-        activeSub: action.payload
       }
     }
 
@@ -68,6 +66,62 @@ function site(state=initialState, action){
   }
 }
 
+function details(state=commentState, action) {
+  switch(action.type){
+
+    case "FETCH_POST": {
+      return {
+        ...state,
+        post: action.payload
+      }
+    }
+
+    case "FETCH_COMMENTS": {
+      return {
+        ...state,
+        comments: action.payload
+      }
+    }
+
+    case "CHANGE_COMMENTS_SORT": {
+      return {
+        ...state,
+        sortBy: action.payload
+      }
+    }
+
+    case "POST_COMMENT": {
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
+      }
+    }
+
+    case "UP_VOTE_COMMENT": {
+      return {
+        ...state,
+        comments: state.comments.map(comment => 
+          comment.id === action.payload.id ? { ...comment, voteScore: action.payload.voteScore}: comment)
+      }
+    }
+
+    case "DOWN_VOTE_COMMENT": {
+      return {
+        ...state,
+        comments: state.comments.map(comment => 
+          comment.id === action.payload.id ? { ...comment, voteScore: action.payload.voteScore}: comment)
+      }
+    }
+
+    default: {
+      return {
+        ...state
+      }
+    }
+  }
+}
+
 export default combineReducers({
-  site
+  site,
+  details
 })

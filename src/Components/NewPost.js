@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 import axios from 'axios';
 
@@ -17,12 +20,21 @@ const headers = {
 
 class NewPost extends Component {
 
+    PropTypes= {
+
+    }
+
     state = {
         username:"",
         title:"",
         body:"",
-        category:""
+        category:"",
+        open: false
     }
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
 
     updateUsername = (input) => {
         this.setState({username:input})
@@ -50,32 +62,46 @@ class NewPost extends Component {
     }
 
     createPost = () => {
-        let payload = {
-            id: this.uuid(),
-            timestamp: Date.now(),
-            title: this.state.title,
-            body: this.state.body,
-            author: this.state.username,
-            category: this.state.category
+        if(this.state.title === "" ||
+            this.state.category === "" ||
+            this.state.username === "") {
+            this.setState({open: true});
         }
+        else {
+            let payload = {
+                id: this.uuid(),
+                timestamp: Date.now(),
+                title: this.state.title,
+                body: this.state.body,
+                author: this.state.username,
+                category: this.state.category
+            }
 
-        axios.post(`${api}/posts`, payload, { headers })
-        .then(response => {
-            this.setState({
-                username:"",
-                title:"",
-                body:"",
-                category:""
+            axios.post(`${api}/posts`, payload, { headers })
+            .then(response => {
+                this.setState({
+                    username:"",
+                    title:"",
+                    body:"",
+                    category:""
+                });
             });
-        })
+        }
     }
 
     render(){
         const { username, title, body, category } = this.state;
+        const actions = [
+            <FlatButton
+                label="OK"
+                primary={true}
+                onClick={this.handleClose}
+            />
+        ];
         return (
             <div>
                 <div className="input-field">
-                    <div>Username</div>
+                    <div className="mandatory">Username</div>
                     <input 
                         type="text" 
                         value={username}
@@ -102,11 +128,23 @@ class NewPost extends Component {
                         value={category}
                         onChange = {(e) => (this.updateCategory(e.target.value))}/>
                 </div>
-                <div>required</div>
+                <div style={{marginLeft: "1em", marginBottom:"0.5em"}}>
+                    <span style={{color:"red"}}>* </span>required
+                </div>
                 <RaisedButton 
                     label="Submit" 
                     secondary={true} 
-                    onClick={() => this.createPost()}/>
+                    onClick={() => this.createPost()}
+                    style={{marginLeft: "1em"}}/>
+
+                    <Dialog
+                        actions={actions}
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleClose}
+                    >
+                        Fill all required fields
+                    </Dialog>
             </div>
         )
     }

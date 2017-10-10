@@ -6,8 +6,8 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'Hello World!! This is Post #1',
-    body: 'This is the first post on this thing',
+    title: 'Hello World! This is Post#1',
+    body: 'This is the first post EVER',
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
@@ -16,8 +16,8 @@ const defaultData = {
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'This is Post #2',
-    body: 'This is the second post on this thing',
+    title: 'Do NOT upvote this post',
+    body: '...or do, I dont care',
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
