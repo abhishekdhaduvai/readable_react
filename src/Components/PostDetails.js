@@ -7,6 +7,7 @@ import Sort from './Sort';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import { Redirect } from 'react-router'
 
 import { connect } from 'react-redux';
 import { fetchComments, fetchPost, changeCommentsSort, postComment } from '../actions';
@@ -23,9 +24,11 @@ class PostDetails extends Component {
 
     state = {
       newComment: "",
+      newTitle:"",
       emptyComment: false,
       submitted: false,
       open: false,
+      edit: false
     }
 
     uuid = () => {
@@ -49,13 +52,18 @@ class PostDetails extends Component {
 
     handleClose = (input) => {
         if(input === "Yes"){
-            this.deletePost()
+            this.deletePost();
         }
         this.setState({open: false});
     };
 
     deletePost = () => {
       console.log("deleting ", this.props.details.post)
+      // window.location = '/'
+    }
+
+    updateTitle = () => {
+      console.log(this.state.newTitle)
     }
 
     updateComment = (e) => {
@@ -84,6 +92,7 @@ class PostDetails extends Component {
       const {post} = this.props.details;
       const {comments} = this.props.details;
       const {sortBy} = this.props.details;
+
       const actions = [
         <FlatButton
             label="Yes"
@@ -121,13 +130,32 @@ class PostDetails extends Component {
             <PostVotes post={post} />
             <div className="post-info">
                 <div className="post-title">
-                    <a>{post.title}</a>
+                    {!this.state.edit && <span>{post.title}</span>}
+                    {this.state.edit && 
+                      <span>
+                        <textarea 
+                          rows="4" 
+                          cols="50"
+                          value={this.state.newTitle}
+                          onChange={(e) => (this.setState({newTitle: e.target.value}))} />
+                        <br />
+                        <button onClick={() => {this.updateTitle()}}>Update</button>
+                        <button onClick={() => {
+                            this.setState({newTitle: this.props.details.post.title}),
+                            this.setState({edit: false},
+                          )}}>Cancel</button>
+                      </span>
+                    }
                 </div>
                 <div className="post-details">
                     <span>
                       submitted <Timestamp time={post.timestamp}/> by 
                       <a>{post.author}</a> to 
-                      <a href={`/${post.category}`}>{post.category}</a>
+                      <a href={`/${post.category}`}> {post.category}</a>
+                    </span>
+                    <vr style={{fontSize: "initial", margin: "0 5px"}}/>
+                    <span style={{fontWeight: "bold", color: "#424242"}}>
+                      <a onClick={() => (this.setState({edit: true}))}>edit</a>
                     </span>
                     <vr style={{fontSize: "initial", margin: "0 5px"}}/>
                     <span style={{fontWeight: "bold", color: "#424242"}}>
@@ -141,7 +169,10 @@ class PostDetails extends Component {
           </div>
 
           <div className="comments">
-            <div>Showing {comments.length} comments</div>
+            <div>Showing {comments.length} 
+              {comments.length !== 1 && <span>comments</span>}
+              {comments.length === 1 && <span>comment</span>}
+            </div>
             <hr style={{margin:"0"}}/>
 
             <div style={{margin: "5px 0", fontSize: "0.95em"}}>
