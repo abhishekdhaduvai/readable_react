@@ -46,21 +46,21 @@ export function fetchPosts(category) {
   }
 }
 
-export function deletePost(id) {
-  return function(dispatch){
-    axios.delete(`${api}/posts/${id}`, {headers})
-    .then(response => {
-      dispatch({type: DELETE_POST, payload: id})
-    })
-  }
-}
-
 export function fetchPost(id) {
   return function(dispatch){
     dispatch({type: LOADING})
     axios.get(`${api}/posts/${id}`, {headers})
     .then(response => {
       dispatch({type: FETCH_POST, payload: response.data});
+    })
+  }
+}
+
+export function deletePost(id){
+  return function(dispatch){
+    axios.delete(`${api}/posts/${id}`, {headers})
+    .then(response => {
+      dispatch({type: DELETE_POST, payload: id})
     })
   }
 }

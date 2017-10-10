@@ -9,7 +9,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { connect } from 'react-redux';
-import { fetchComments, fetchPost, changeCommentsSort, postComment } from '../actions';
+import { fetchComments, fetchPost, deletePost, changeCommentsSort, postComment } from '../actions';
 
 class PostDetails extends Component {
 
@@ -57,8 +57,8 @@ class PostDetails extends Component {
     };
 
     deletePost = () => {
-      console.log("deleting ", this.props.details.post)
-      // window.location = '/'
+      this.props.deletePost(this.props.details.post.id)
+      window.location = '/'
     }
 
     updateTitle = () => {
@@ -169,8 +169,8 @@ class PostDetails extends Component {
 
           <div className="comments">
             <div>Showing {comments.length} 
-              {comments.length !== 1 && <span>comments</span>}
-              {comments.length === 1 && <span>comment</span>}
+              {comments.length !== 1 && <span> comments</span>}
+              {comments.length === 1 && <span> comment</span>}
             </div>
             <hr style={{margin:"0"}}/>
 
@@ -227,6 +227,7 @@ function mapDispatchToProps (dispatch) {
   return {
     fetchComments: (id) => dispatch(fetchComments(id)),
     fetchPost: (id) => dispatch(fetchPost(id)),
+    deletePost: (id) => dispatch(deletePost(id)),
     changeCommentsSort: (sort) => dispatch(changeCommentsSort(sort)),
     postComment: (comment) => dispatch(postComment(comment))
   }
