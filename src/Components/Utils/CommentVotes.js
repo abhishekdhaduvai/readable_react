@@ -129,7 +129,7 @@ class Votes extends Component {
         return (
             <div className="votes" style={voteStyles}>
                 <div>
-                    <div className="voteButton">
+                    <div className="voteButton" style={{maxHeight: "15px"}}>
                         <img 
                             src={this.state.upvoteIcon} 
                             width="15px"
@@ -138,13 +138,13 @@ class Votes extends Component {
                             className="upvote"
                             onClick={() => this.upVote(post.id)}/>
                     </div>
-                    <div className="voteButton">
+                    <div style={{overflow: "hidden", maxHeight: "20px"}}>
                         <img 
                             src={this.state.downvoteIcon} 
                             width="15px"
                             height="30px"
                             alt="Dn"
-                            className="downvote"
+                            style={{position: "relative", bottom: "18px"}}
                             onClick={() => this.downVote(post.id)}/>
                     </div>
                 </div> 
