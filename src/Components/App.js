@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import NavBarDrawer from './NavBarDrawer';
 import SubReadable from './SubReadable';
 import NewPost from './NewPost';
-import Comments from './Comments';
+import PostDetails from './PostDetails';
 import * as API from '../API.js';
 
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ class App extends Component {
         )} /> 
 
         <Route exact path="/comments/:id" render={() => (
-          <Comments />
+          <PostDetails />
         )} />
 
         <Route exact path="/create/new-post" render={() => (

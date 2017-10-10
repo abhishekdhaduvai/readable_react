@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import notVoted from './icons/not-voted.png';
-import vote from './icons/voted.png';
-import Timestamp from './Timestamp';
+import notVoted from './Utils/icons/not-voted.png';
+import vote from './Utils/icons/voted.png';
+import Timestamp from './Utils/Timestamp';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment } from '../../actions'
+import { upVoteComment, downVoteComment } from '../actions'
 
-class Votes extends Component {
+class Comment extends Component {
 
     state = {
         voted: "",
@@ -215,4 +215,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Votes)
+)(Comment)
