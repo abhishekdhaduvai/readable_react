@@ -14,6 +14,10 @@ class Votes extends Component {
         downvoteIcon: notVoted
     }
 
+    PropTypes = {
+        post: PropTypes.object.isRequired
+    }
+
     toggleUpvote = () => {
         if(this.state.upvoteIcon === notVoted){
             this.setState({upvoteIcon: vote});

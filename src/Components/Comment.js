@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import notVoted from './Utils/icons/not-voted.png';
 import vote from './Utils/icons/voted.png';
 import Timestamp from './Utils/Timestamp';
-import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 

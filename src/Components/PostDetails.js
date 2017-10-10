@@ -7,7 +7,6 @@ import Sort from './Sort';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { Redirect } from 'react-router'
 
 import { connect } from 'react-redux';
 import { fetchComments, fetchPost, changeCommentsSort, postComment } from '../actions';
@@ -141,9 +140,9 @@ class PostDetails extends Component {
                         <br />
                         <button onClick={() => {this.updateTitle()}}>Update</button>
                         <button onClick={() => {
-                            this.setState({newTitle: this.props.details.post.title}),
-                            this.setState({edit: false},
-                          )}}>Cancel</button>
+                            this.setState({newTitle: this.props.details.post.title})
+                            this.setState({edit: false})
+                        }}>Cancel</button>
                       </span>
                     }
                 </div>
