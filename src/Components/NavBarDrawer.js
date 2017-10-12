@@ -5,8 +5,6 @@ import MenuItem from 'material-ui/MenuItem';
 import NavBar from './Utils/NavBar';
 import Divider from 'material-ui/Divider';
 
-import { connect } from 'react-redux';
-
 class NavBarDrawer extends React.Component {
 
   PropTypes = {
@@ -58,19 +56,4 @@ class NavBarDrawer extends React.Component {
   }
 }
 
-function mapStateToProps () {
-  return {
-    
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavBarDrawer)
+export default NavBarDrawer
