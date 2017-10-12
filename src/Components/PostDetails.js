@@ -60,7 +60,6 @@ class PostDetails extends Component {
 
     deletePost = () => {
       this.props.deletePost(this.props.details.post.id)
-      window.location = '/'
     }
 
     updatePost = () => {
@@ -229,8 +228,12 @@ class PostDetails extends Component {
             </div>
 
             {comments.map(comment => (
-              <div key={`${comment.id}`} className="comment-container">
-                  <Comment post={comment} />
+              <div key={`${comment.id}`}>
+                {!comment.deleted && 
+                  <div className="comment-container">
+                    <Comment post={comment} />
+                  </div>
+                }
               </div>
             ))}
           </div>

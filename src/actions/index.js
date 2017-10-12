@@ -60,8 +60,8 @@ export function fetchPost(id) {
 export function deletePost(id){
   return function(dispatch){
     axios.delete(`${api}/posts/${id}`, {headers})
-    .then(response => {
-      dispatch({type: DELETE_POST, payload: id})
+    .then(response => {      
+      // window.location = '/'
     })
   }
 }
@@ -140,7 +140,8 @@ export function updatePost(post){
   return function(dispatch){
     axios.put(`${api}/posts/${post.id}`, post, {headers})
     .then(response => {
-      window.location.reload()
+      dispatch({type: UPDATE_POST, payload: post})
+      // window.location.reload()
     })
 
   }

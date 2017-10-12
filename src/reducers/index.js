@@ -30,14 +30,6 @@ function site(state=initialState, action){
       }
     }
 
-    case "DELETE_POST": {
-      return {
-        ...state,
-        posts: state.posts.map(post =>
-          post.id === action.payload ? { ...post, deleted: true } : post)
-      }
-    }
-
     case "CHANGE_SORT": {
       return {
         ...state,
@@ -73,6 +65,37 @@ function details(state=commentState, action) {
       return {
         ...state,
         post: action.payload
+      }
+    }
+
+    case "UP_VOTE": {
+      return {
+        ...state,
+        post:{
+          ...state.post, 
+          voteScore: action.payload.voteScore 
+        }
+      }
+    }
+    
+    case "DOWN_VOTE": {
+      return {
+        ...state,
+        post: { 
+          ...state.post, 
+          voteScore: action.payload.voteScore
+        }
+      }
+    }
+
+    case "UPDATE_POST": {
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          title: action.payload.title,
+          body: action.payload.body
+        }
       }
     }
 
@@ -128,7 +151,7 @@ function details(state=commentState, action) {
       return {
         ...state,
         comments: state.comments.map(comment => 
-          comment.id === action.payload.id ? {...comment, deleted: true}: comment)
+          comment.id === action.payload ? {...comment, deleted: true}: comment)
       }
     }
 

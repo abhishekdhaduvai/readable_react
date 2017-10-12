@@ -45,9 +45,9 @@ class App extends Component {
           <NewPost />
         )} /> 
 
-        <Route exact path="/create/new-sub" render={() => (
+        {/* <Route exact path="/create/new-sub" render={() => (
           <NewPost />
-        )} />     
+        )} />      */}
 
       </div>
     );

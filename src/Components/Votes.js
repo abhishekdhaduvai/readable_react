@@ -40,21 +40,17 @@ class Votes extends Component {
         if(this.state.voted === ""){
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
-            this.props.post.voteScore++;
             this.toggleUpvote();
         }
         else if (this.state.voted === "downVoted"){
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
             this.props.upVote(id);
-            this.props.post.voteScore++;
-            this.props.post.voteScore++;
             this.toggleUpvote();
         }
         else if (this.state.voted === "upVoted") {
             this.setState({voted: ""})
             this.props.downVote(id);
-            this.props.post.voteScore--;
             this.toggleUpvote();
         }
     }
@@ -63,21 +59,17 @@ class Votes extends Component {
         if(this.state.voted === ""){
             this.setState({voted: "downVoted"})
             this.props.downVote(id);
-            this.props.post.voteScore--;
             this.toggleDownVote();
         }
         else if(this.state.voted === "upVoted"){
             this.setState({voted: "downVoted"})
             this.props.downVote(id);
             this.props.downVote(id);
-            this.props.post.voteScore--;
-            this.props.post.voteScore--;
             this.toggleDownVote();
         }
         else if(this.state.voted === "downVoted"){
             this.setState({voted: ""})
             this.props.upVote(id);
-            this.props.post.voteScore++;
             this.toggleDownVote();
         }
     }

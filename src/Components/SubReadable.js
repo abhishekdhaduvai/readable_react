@@ -70,11 +70,11 @@ class SubReadable extends Component {
                                     secondary={true}
                                     href="create/new-post"
                                     className="add-content-button" />
-                                <RaisedButton 
+                                {/* <RaisedButton 
                                     label="Create a new Sub" 
                                     secondary={true}
                                     href="create/new-sub"
-                                    className="add-content-button" />
+                                    className="add-content-button" /> */}
                             </div>
                         </div>
                     </div>

@@ -83,9 +83,7 @@ class Comment extends Component {
     }
 
     deleteComment = () => {
-        console.log("deleted ", this.props.post)
         this.props.deleteComment(this.props.post.id)
-        window.location.reload()
     }
 
     updateComment = () => {
