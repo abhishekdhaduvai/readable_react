@@ -6,31 +6,21 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'Hello World! This is Post#1',
-    body: 'This is the first post EVER',
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
-    deleted: false 
+    deleted: false
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'Do NOT upvote this post',
-    body: '...or do, I dont care',
+    title: 'Learn Redux in 10 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
-    deleted: false
-  },
-  "6ni6oasgm7mf1p33lnez": {
-    id: '6ni6oasgm7mf1p33lnez',
-    timestamp: 1506488860000,
-    title: 'This is Post #3',
-    body: 'This is the first post on this sub',
-    author: 'thingone',
-    category: 'udacity',
-    voteScore: 5,
     deleted: false
   }
 }
@@ -56,7 +46,7 @@ function get (token, id) {
   return new Promise((res) => {
     const posts = getData(token)
     res(
-      posts[id].deleted 
+      posts[id].deleted
         ? {}
         : posts[id]
     )
@@ -67,7 +57,7 @@ function getAll (token) {
   return new Promise((res) => {
     const posts = getData(token)
     let keys = Object.keys(posts)
-    let filtered_keys = keys.filter(key => !posts.deleted)
+    let filtered_keys = keys.filter(key => !posts[key].deleted)
     res(filtered_keys.map(key => posts[key]))
   })
 }
@@ -75,7 +65,7 @@ function getAll (token) {
 function add (token, post) {
   return new Promise((res) => {
     let posts = getData(token)
-    
+
     posts[post.id] = {
       id: post.id,
       timestamp: post.timestamp,
@@ -86,7 +76,7 @@ function add (token, post) {
       voteScore: 1,
       deleted: false
     }
-     
+
     res(posts[post.id])
   })
 }

@@ -30,26 +30,12 @@ function getData (token) {
   return data
 }
 
-function add (token, cat) {
+function getAll (token) {
   return new Promise((res) => {
-    let categories = getData(token)
-    console.log("cate ", categories);
-    categories.categories[3]= {
-      name:cat.name,
-      path:cat.path
-    }
-     
     res(getData(token))
   })
 }
 
-function getAll (token) {
-  return new Promise((res) => {
-    res(getData(token))    
-  })
-}
-
 module.exports = {
-  getAll,
-  add
+  getAll
 }
