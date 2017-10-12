@@ -27,26 +27,6 @@ class NewPost extends Component {
         open: false
     }
 
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
-    updateUsername = (input) => {
-        this.setState({username:input})
-    }
-
-    updateTitle = (input) => {
-        this.setState({title:input})
-    }
-
-    updateBody = (input) => {
-        this.setState({body:input})
-    }
-
-    updateCategory = (input) => {
-        this.setState({category:input})
-    }
-
     uuid = () => {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
@@ -80,6 +60,7 @@ class NewPost extends Component {
                     body:"",
                     category:""
                 });
+                window.location = '/'
             });
         }
     }
@@ -100,28 +81,28 @@ class NewPost extends Component {
                     <input 
                         type="text" 
                         value={username}
-                        onChange = {(e) => (this.updateUsername(e.target.value))}/>
+                        onChange = {(e) => (this.setState({username:e.target.value}))}/>
                 </div>
                 <div className="input-field">
                     <div className="mandatory">Title</div>
                     <input 
                         type="text" 
                         value={title}
-                        onChange = {(e) => (this.updateTitle(e.target.value))}/>
+                        onChange = {(e) => (this.setState({title:e.target.value}))}/>
                 </div>
                 <div className="input-field">
                     <div>Body</div>
                     <input 
                         type="text" 
                         value={body}
-                        onChange = {(e) => (this.updateBody(e.target.value))}/>
+                        onChange = {(e) => (this.setState({body:e.target.value}))}/>
                 </div>
                 <div className="input-field">
                     <div className="mandatory">Category</div>
                     <input 
                         type="text" 
                         value={category}
-                        onChange = {(e) => (this.updateCategory(e.target.value))}/>
+                        onChange = {(e) => (this.setState({category:e.target.value}))}/>
                 </div>
                 <div style={{marginLeft: "1em", marginBottom:"0.5em"}}>
                     <span style={{color:"red"}}>* </span>required
@@ -136,8 +117,7 @@ class NewPost extends Component {
                         actions={actions}
                         modal={false}
                         open={this.state.open}
-                        onRequestClose={this.handleClose}
-                    >
+                        onRequestClose={() => (this.setState({open: false}))}>
                         Fill all required fields
                     </Dialog>
             </div>
