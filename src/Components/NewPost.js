@@ -27,6 +27,10 @@ class NewPost extends Component {
         open: false
     }
 
+    handleClose = () => {
+        this.setState({open: false})
+    }
+
     uuid = () => {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
@@ -117,7 +121,7 @@ class NewPost extends Component {
                         actions={actions}
                         modal={false}
                         open={this.state.open}
-                        onRequestClose={() => (this.setState({open: false}))}>
+                        onRequestClose={this.handleClose}>
                         Fill all required fields
                     </Dialog>
             </div>
