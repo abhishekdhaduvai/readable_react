@@ -14,19 +14,19 @@ import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-// const logger = store => next => action => {
-//   console.group(action.type)
-//   console.info('dispatching', action)
-//   let result = next(action)
-//   console.log('next state', store.getState())
-//   console.groupEnd(action.type)
-//   return result
-// }
+const logger = store => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  console.groupEnd(action.type)
+  return result
+}
 
 const store = createStore(
   reducer,
   composeEnhancers(
-	  applyMiddleware(thunk)
+	  applyMiddleware(logger, thunk)
   )
 )
 

@@ -9,7 +9,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { connect } from 'react-redux';
-import { fetchComments, fetchPost, deletePost, changeCommentsSort, postComment } from '../actions';
+import { fetchComments, fetchPost, deletePost, updatePost, changeCommentsSort, postComment } from '../actions';
 
 class PostDetails extends Component {
 
@@ -23,11 +23,13 @@ class PostDetails extends Component {
 
     state = {
       newComment: "",
-      newTitle:"",
+      newTitle: this.props.details.post.title,
+      newBody: this.props.details.post.body,
       emptyComment: false,
       submitted: false,
       open: false,
-      edit: false
+      edit: false,
+      editBody: false,
     }
 
     uuid = () => {
@@ -61,15 +63,18 @@ class PostDetails extends Component {
       window.location = '/'
     }
 
-    updateTitle = () => {
-      console.log(this.state.newTitle)
-    }
-
-    updateComment = (e) => {
-      this.setState({newComment: e.target.value})
+    updatePost = () => {
+      let updatedPost = {
+        id: this.props.details.post.id,
+        title: this.state.newTitle || this.props.details.post.title,
+        body: this.state.newBody || this.props.details.post.body
+      }
+      this.props.updatePost(updatedPost)
+      this.setState({edit: false})
+      this.setState({editBody: false})
     }
     
-    postComment(comment) {
+    updateComment(comment) {
       if(this.state.newComment !== ""){
         let newComment = {
           id: this.uuid(),
@@ -138,9 +143,8 @@ class PostDetails extends Component {
                           value={this.state.newTitle}
                           onChange={(e) => (this.setState({newTitle: e.target.value}))} />
                         <br />
-                        <button onClick={() => {this.updateTitle()}}>Update</button>
+                        <button onClick={() => {this.updatePost()}}>Update</button>
                         <button onClick={() => {
-                            this.setState({newTitle: this.props.details.post.title})
                             this.setState({edit: false})
                         }}>Cancel</button>
                       </span>
@@ -154,15 +158,40 @@ class PostDetails extends Component {
                     </span>
                     <vr style={{fontSize: "initial", margin: "0 5px"}}/>
                     <span style={{fontWeight: "bold", color: "#424242"}}>
-                      <a onClick={() => (this.setState({edit: true}))}>edit</a>
+                      <a onClick={() => {
+                        this.setState({newTitle: this.props.details.post.title})
+                        this.setState({edit: true})
+                      }}>edit</a>
                     </span>
                     <vr style={{fontSize: "initial", margin: "0 5px"}}/>
                     <span style={{fontWeight: "bold", color: "#424242"}}>
                       <a onClick={() => (this.setState({open: true}))}>delete</a>
                     </span>
                 </div>
-                <div className="post-body">
-                  {post.body}
+                <div>
+                  <div className="post-body">
+                    {!this.state.editBody && <span>{post.body}</span>}
+                    {this.state.editBody && 
+                      <span>
+                        <textarea 
+                          rows="4" 
+                          cols="70"
+                          value={this.state.newBody}
+                          onChange={(e) => (this.setState({newBody: e.target.value}))} />
+                        <br />
+                        <button onClick={() => {this.updatePost()}}>Update</button>
+                        <button onClick={() => {
+                            this.setState({editBody: false})
+                        }}>Cancel</button>
+                      </span>
+                    }
+                  </div>
+                  <span style={{fontSize: "smaller", fontWeight: "bold", color: "#424242"}}>
+                    <button onClick={() => {
+                      this.setState({newBody: this.props.details.post.body})
+                      this.setState({editBody: true})
+                    }}>edit</button>
+                  </span>
                 </div>
             </div>
           </div>
@@ -184,12 +213,12 @@ class PostDetails extends Component {
                 rows="8" 
                 cols="75"
                 value={this.state.newComment}
-                onChange = {(e) => (this.updateComment(e))} />
+                onChange = {(e) => this.setState({newComment: e.target.value})} />
               <br />
               <RaisedButton 
                 label="Submit" 
                 primary={true}
-                onClick={() => this.postComment()}/>
+                onClick={() => this.updateComment()}/>
               <span style={{fontSize: "smaller", marginLeft: "1em"}}>
               {this.state.submitted && <span>Submitted</span>}
               {this.state.emptyComment && 
@@ -219,7 +248,7 @@ class PostDetails extends Component {
 
 function mapStateToProps ({ details }) {
   return {
-    details
+    details,
   }
 }
 
@@ -227,6 +256,7 @@ function mapDispatchToProps (dispatch) {
   return {
     fetchComments: (id) => dispatch(fetchComments(id)),
     fetchPost: (id) => dispatch(fetchPost(id)),
+    updatePost: (post) => dispatch(updatePost(post)),
     deletePost: (id) => dispatch(deletePost(id)),
     changeCommentsSort: (sort) => dispatch(changeCommentsSort(sort)),
     postComment: (comment) => dispatch(postComment(comment))

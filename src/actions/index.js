@@ -17,6 +17,7 @@ export const FETCH_POSTS = 'FETCH_POSTS'
 export const DELETE_POST = 'DELETE_POST'
 export const FETCH_POST = 'FETCH_POST'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
+export const UPDATE_POST = 'UPDATE_POST'
 export const UP_VOTE = 'UP_VOTE'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const CHANGE_SUB = 'CHANGE_SUB'
@@ -132,6 +133,16 @@ export function downVoteComment(id){
     .then((response) => {
       dispatch({type: DOWN_VOTE_COMMENT, payload: response.data})
     })
+  }
+}
+
+export function updatePost(post){
+  return function(dispatch){
+    axios.put(`${api}/posts/${post.id}`, post, {headers})
+    .then(response => {
+      window.location.reload()
+    })
+
   }
 }
 
