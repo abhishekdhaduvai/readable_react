@@ -61,7 +61,7 @@ export function deletePost(id){
   return function(dispatch){
     axios.delete(`${api}/posts/${id}`, {headers})
     .then(response => {      
-      // window.location = '/'
+      window.location = '/'
     })
   }
 }
