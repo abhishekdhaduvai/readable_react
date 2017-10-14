@@ -12,10 +12,10 @@ class SubReadable extends Component {
 
     componentWillMount(){
         if(window.location.pathname === "/"){
-            this.props.fetchPosts();
+            this.props.fetchPosts("/posts");
         }
         else {
-            this.props.fetchPosts(window.location.pathname.slice(1))
+            this.props.fetchPosts("/"+window.location.pathname.slice(1)+"/posts")
         }
     }
 

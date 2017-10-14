@@ -24,7 +24,7 @@ class Post extends React.Component{
                                 submitted <Timestamp time={post.timestamp}/> by <a>{post.author}</a> to <a href={post.category}>{post.category}</a>
                             </div>
                             <div className="comments-button">
-                                <a href= {`comments/${post.id}`}>comments</a>
+                                <a href= {`comments/${post.id}`}><span>{post.comments}</span> comments</a>
                             </div>
                         </div>
                     </div>
