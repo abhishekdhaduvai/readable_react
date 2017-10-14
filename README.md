@@ -9,9 +9,10 @@ This will install the dependencies used to build and run the project.
 
 ## Starting the server
 
-cd into the project dir and run the following command to start a local server.
+cd into the project dir/server and run the following command to start a local server.
 ```
-node server/server.js
+npm install
+node server.js
 ```
 
 Run the following command to start the app locally.
