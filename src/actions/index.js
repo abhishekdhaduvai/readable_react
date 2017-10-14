@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as ACTION from './helpers/constants';
 
 const api = "http://localhost:3001";
 
@@ -12,36 +13,19 @@ const headers = {
   'Authorization': token
 }
 
-export const LOADING = 'LOADING'
-export const FETCH_POSTS = 'FETCH_POSTS'
-export const DELETE_POST = 'DELETE_POST'
-export const FETCH_POST = 'FETCH_POST'
-export const FETCH_COMMENTS = 'FETCH_COMMENTS'
-export const UPDATE_POST = 'UPDATE_POST'
-export const UP_VOTE = 'UP_VOTE'
-export const DOWN_VOTE = 'DOWN_VOTE'
-export const CHANGE_SUB = 'CHANGE_SUB'
-export const CHANGE_SORT = 'CHANGE_SORT'
-export const CHANGE_COMMENTS_SORT = 'CHANGE_COMMENTS_SORT'
-export const POST_COMMENT = 'POST_COMMENT'
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-
 export function fetchPosts(category) {
   return function(dispatch){
-    dispatch({type: LOADING})
+    dispatch({type: ACTION.LOADING})
     if(category === undefined){
       axios.get(`${api}/posts`, { headers })
       .then((response) => {
-        dispatch({type: FETCH_POSTS, payload: response.data})
+        dispatch({type: ACTION.FETCH_POSTS, payload: response.data})
       })
     }
     else {
       axios.get(`${api}/${category}/posts`, { headers })
       .then((response) => {
-        dispatch({type: FETCH_POSTS, payload: response.data})
+        dispatch({type: ACTION.FETCH_POSTS, payload: response.data})
       })
     }
   }
@@ -49,10 +33,10 @@ export function fetchPosts(category) {
 
 export function fetchPost(id) {
   return function(dispatch){
-    dispatch({type: LOADING})
+    dispatch({type: ACTION.LOADING})
     axios.get(`${api}/posts/${id}`, {headers})
     .then(response => {
-      dispatch({type: FETCH_POST, payload: response.data});
+      dispatch({type: ACTION.FETCH_POST, payload: response.data});
     })
   }
 }
@@ -70,7 +54,7 @@ export function fetchComments(id) {
   return function(dispatch){
     axios.get(`${api}/posts/${id}/comments`, {headers})
     .then(response => {
-      dispatch({type: FETCH_COMMENTS, payload: response.data});
+      dispatch({type: ACTION.FETCH_COMMENTS, payload: response.data});
     })
   }
 }
@@ -80,7 +64,7 @@ export function upVote(id){
     const body = {"option": "upVote"}
     axios.post(`${api}/posts/${id}`, body, {headers})
     .then((response) => {
-      dispatch({type: UP_VOTE, payload: response.data})
+      dispatch({type: ACTION.UP_VOTE, payload: response.data})
     })
   }
 }
@@ -90,20 +74,20 @@ export function downVote(id){
     const body = {"option": "downVote"}
     axios.post(`${api}/posts/${id}`, body, {headers})
     .then((response) => {
-      dispatch({type: DOWN_VOTE, payload: response.data})
+      dispatch({type: ACTION.DOWN_VOTE, payload: response.data})
     })
   }
 }
 
 export function changeSort(sort){
   return function(dispatch){
-    dispatch({type: CHANGE_SORT, payload: sort})
+    dispatch({type: ACTION.CHANGE_SORT, payload: sort})
   }
 }
 
 export function changeCommentsSort(sort){
   return function(dispatch){
-    dispatch({type: CHANGE_COMMENTS_SORT, payload: sort})
+    dispatch({type: ACTION.CHANGE_COMMENTS_SORT, payload: sort})
   }
 }
 
@@ -111,7 +95,7 @@ export function postComment(comment){
   return function(dispatch){
     axios.post(`${api}/comments`, comment, {headers})
     .then(response => {
-      dispatch({type: POST_COMMENT, payload: comment})
+      dispatch({type: ACTION.POST_COMMENT, payload: comment})
     })
   }
 }
@@ -121,7 +105,7 @@ export function upVoteComment(id){
     const body = {"option": "upVote"}
     axios.post(`${api}/comments/${id}`, body, {headers})
     .then((response) => {
-      dispatch({type: DOWN_VOTE_COMMENT, payload: response.data})
+      dispatch({type: ACTION.DOWN_VOTE_COMMENT, payload: response.data})
     })
   }
 }
@@ -131,7 +115,7 @@ export function downVoteComment(id){
     const body = {"option": "downVote"}
     axios.post(`${api}/comments/${id}`, body, {headers})
     .then((response) => {
-      dispatch({type: DOWN_VOTE_COMMENT, payload: response.data})
+      dispatch({type: ACTION.DOWN_VOTE_COMMENT, payload: response.data})
     })
   }
 }
@@ -140,8 +124,7 @@ export function updatePost(post){
   return function(dispatch){
     axios.put(`${api}/posts/${post.id}`, post, {headers})
     .then(response => {
-      dispatch({type: UPDATE_POST, payload: post})
-      // window.location.reload()
+      dispatch({type: ACTION.UPDATE_POST, payload: post})
     })
 
   }
@@ -151,7 +134,7 @@ export function updateComment(comment){
   return function(dispatch){
     axios.put(`${api}/comments/${comment.id}`, comment, {headers})
     .then(response => {
-      dispatch({type: UPDATE_COMMENT, payload: comment})
+      dispatch({type: ACTION.UPDATE_COMMENT, payload: comment})
     })
   }
 }
@@ -160,7 +143,7 @@ export function deleteComment(id){
   return function(dispatch){
     axios.delete(`${api}/comments/${id}`, {headers})
     .then(response => {
-      dispatch({type: DELETE_COMMENT, payload: id})
+      dispatch({type: ACTION.DELETE_COMMENT, payload: id})
     })
   }
 }
