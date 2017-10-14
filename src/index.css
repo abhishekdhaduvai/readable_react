@@ -207,3 +207,10 @@ vr {
   margin: 10px 0px;
   border: 1px solid grey;
 }
+
+.deleted-post{
+  text-align: center;
+  margin: 5vh;
+  visibility: visible;
+  transition: visibility 1s;
+}

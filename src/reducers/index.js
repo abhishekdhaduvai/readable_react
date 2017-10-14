@@ -8,6 +8,7 @@ const initialState = {
 
 const commentState = {
   "post":{},
+  "loading": true,
   "sortBy": "Score",
   "comments":[],
 }
@@ -64,6 +65,7 @@ function details(state=commentState, action) {
     case "FETCH_POST": {
       return {
         ...state,
+        loading: false,
         post: action.payload
       }
     }
