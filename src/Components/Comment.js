@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment, deleteComment, updateComment } from '../actions'
+import * as Actions from '../actions'
 
 class Comment extends Component {
 
@@ -189,21 +189,16 @@ class Comment extends Component {
     }
 }
 
-function mapStateToProps () {
-  return {
-  }
-}
-
 function mapDispatchToProps (dispatch) {
   return {
-    upVoteComment:(id) => dispatch(upVoteComment(id)),
-    downVoteComment:(id) => dispatch(downVoteComment(id)),
-    updateComment:(comment) => dispatch(updateComment(comment)),
-    deleteComment:(id) => dispatch(deleteComment(id))
+    upVoteComment:(id) => dispatch(Actions.upVoteComment(id)),
+    downVoteComment:(id) => dispatch(Actions.downVoteComment(id)),
+    updateComment:(comment) => dispatch(Actions.updateComment(comment)),
+    deleteComment:(id) => dispatch(Actions.deleteComment(id))
   }
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Comment)
