@@ -4,25 +4,18 @@ import NavBarDrawer from './NavBarDrawer';
 import SubReadable from './SubReadable';
 import NewPost from './NewPost';
 import PostDetails from './PostDetails';
-import * as API from '../API.js';
 
 import { connect } from 'react-redux';
+import { fetchCategories } from '../actions';
 
 class App extends Component {
 
-  state = {
-    categories: [{"name":"test", "path":"test"}],
-    posts: []
-  }
-
   componentDidMount(){
-    API.getCategories().then(categories => {
-      this.setState({categories});
-    });
+    this.props.fetchCategories();
   }
 
   render() {
-    const {categories} = this.state;
+    const {categories} = this.props.site;
 
     return (
       <div className="App">
@@ -43,23 +36,26 @@ class App extends Component {
 
         <Route exact path="/create/new-post" render={() => (
           <NewPost />
-        )} /> 
-
-        {/* <Route exact path="/create/new-sub" render={() => (
-          <NewPost />
-        )} />      */}
+        )} />
 
       </div>
     );
   }
 }
 
-function mapStateToProps ({ selectedSub }) {
+function mapStateToProps ({ site }) {
   return {
-    
+    site
+  }
+}
+
+function mapDispatchToProps (dispatch){
+  return {
+    fetchCategories: () => dispatch(fetchCategories()),
   }
 }
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(App)

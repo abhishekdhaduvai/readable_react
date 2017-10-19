@@ -13,18 +13,32 @@ const headers = {
   'Authorization': token
 }
 
+export function fetchCategories() {  
+  return function (dispatch){
+    axios.get(`${api}/categories`, {headers})
+    .then(response => {
+      dispatch({type: ACTION.FETCH_CATEGORIES, payload:response.data})
+    })
+  }
+}
+
 export function fetchPosts(endpoint) {
   return function(dispatch){
     dispatch({type: ACTION.LOADING})
     axios.get(`${api}${endpoint}`, { headers })
     .then((response) => {
       let posts = response.data;
-      posts.map(post=>{
-        axios.get(`${api}/posts/${post.id}/comments`, {headers}).then(response => {
-          post.comments = response.data.length;
-        }) //end getting comments
-        setTimeout(function(){dispatch({type: ACTION.FETCH_POSTS, payload: posts})}, 1000)
-      }) //end loop
+      if(posts.length > 0){
+        posts.map(post=>{
+          axios.get(`${api}/posts/${post.id}/comments`, {headers}).then(response => {
+            post.comments = response.data.length;
+          }) //end getting comments
+          setTimeout(function(){dispatch({type: ACTION.FETCH_POSTS, payload: posts})}, 1000)
+        }) //end loop
+      }
+      else {
+        dispatch({type: ACTION.FETCH_POSTS, payload: posts})
+      }
     }) //end fetchPosts
   }
 }

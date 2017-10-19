@@ -1,5 +1,6 @@
 const initialState = {
   "loading": true,
+  "categories": [],
   "posts":[],
   "sortBy":"Score"
 }
@@ -11,6 +12,13 @@ export function site(state=initialState, action){
       return {
         ...state,
         loading: true
+      }
+    }
+
+    case "FETCH_CATEGORIES": {
+      return {
+        ...state,
+        categories: action.payload.categories
       }
     }
 
