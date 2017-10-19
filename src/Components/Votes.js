@@ -43,12 +43,14 @@ class Votes extends Component {
             this.toggleUpvote();
         }
         else if (this.state.voted === "downVoted"){
+            //Flips vote. Increases voteScore by 2
             this.setState({voted: "upVoted"})
             this.props.upVote(id);
             this.props.upVote(id);
             this.toggleUpvote();
         }
         else if (this.state.voted === "upVoted") {
+            //Toggles Vote if clicked on again
             this.setState({voted: ""})
             this.props.downVote(id);
             this.toggleUpvote();
@@ -62,12 +64,14 @@ class Votes extends Component {
             this.toggleDownVote();
         }
         else if(this.state.voted === "upVoted"){
+            //Flips vote. Decreases voteScore by 2
             this.setState({voted: "downVoted"})
             this.props.downVote(id);
             this.props.downVote(id);
             this.toggleDownVote();
         }
         else if(this.state.voted === "downVoted"){
+            //Toggles Vote if clicked on again. Resets voteScore
             this.setState({voted: ""})
             this.props.upVote(id);
             this.toggleDownVote();
