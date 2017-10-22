@@ -14,8 +14,12 @@ const defaultData = {
         path: 'redux'
       },
       {
-        name: 'udacity',
-        path: 'udacity'
+        name: 'wow',
+        path: 'wow'
+      },
+      {
+        name: 'gunners',
+        path: 'gunners'
       }
   ]
 }
