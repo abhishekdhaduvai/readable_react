@@ -30,6 +30,17 @@ export function site(state=initialState, action){
       }
     }
 
+    case "UPDATE_POST": {
+      return {
+        ...state,
+        posts: state.posts.map(post => 
+          post.id === action.payload.id ? { 
+            ...post, 
+            title: action.payload.title, 
+            body: action.payload.body}: post)
+      }
+    }
+
     case "CHANGE_SORT": {
       return {
         ...state,
