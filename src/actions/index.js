@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as ACTION from './helpers/constants';
+import * as ACTION from './constants';
 
 const api = "http://localhost:3001";
 
