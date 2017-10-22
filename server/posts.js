@@ -6,8 +6,8 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'Udacity is the best place to learn React',
-    body: 'Everyone says so after all.',
+    title: 'Hello World!',
+    body: 'This is the first post in this universe',
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
@@ -16,8 +16,8 @@ const defaultData = {
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'Learn Redux in 10 minutes!',
-    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    title: 'Post memes here!',
+    body: 'Just kidding. Only serious discussions allowed on this forum',
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
