@@ -45,41 +45,47 @@ class Comment extends Component {
     }
 
     upVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState({voted: "upVoted"})
-            this.props.upVoteComment(id);
-            this.toggleUpvote();
-        }
-        else if (this.state.voted === "downVoted"){
-            this.setState({voted: "upVoted"})
-            this.props.upVoteComment(id);
-            this.props.upVoteComment(id);
-            this.toggleUpvote();
-        }
-        else if (this.state.voted === "upVoted") {
-            this.setState({voted: ""})
-            this.props.downVoteComment(id);
-            this.toggleUpvote();
-        }
+        this.props.upVoteComment(id);
+        this.setState({downvoteIcon: notVoted});
+        this.setState({upvoteIcon: vote});
+        // if(this.state.voted === ""){
+        //     this.setState({voted: "upVoted"})
+        //     this.props.upVoteComment(id);
+        //     this.toggleUpvote();
+        // }
+        // else if (this.state.voted === "downVoted"){
+        //     this.setState({voted: "upVoted"})
+        //     this.props.upVoteComment(id);
+        //     this.props.upVoteComment(id);
+        //     this.toggleUpvote();
+        // }
+        // else if (this.state.voted === "upVoted") {
+        //     this.setState({voted: ""})
+        //     this.props.downVoteComment(id);
+        //     this.toggleUpvote();
+        // }
     }
 
     downVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState({voted: "downVoted"})
-            this.props.downVoteComment(id);
-            this.toggleDownVote();
-        }
-        else if(this.state.voted === "upVoted"){
-            this.setState({voted: "downVoted"})
-            this.props.downVoteComment(id);
-            this.props.downVoteComment(id);
-            this.toggleDownVote();
-        }
-        else if(this.state.voted === "downVoted"){
-            this.setState({voted: ""})
-            this.props.upVoteComment(id);
-            this.toggleDownVote();
-        }
+        this.props.downVoteComment(id);
+        this.setState({upvoteIcon: notVoted});
+        this.setState({downvoteIcon: vote});
+        // if(this.state.voted === ""){
+        //     this.setState({voted: "downVoted"})
+        //     this.props.downVoteComment(id);
+        //     this.toggleDownVote();
+        // }
+        // else if(this.state.voted === "upVoted"){
+        //     this.setState({voted: "downVoted"})
+        //     this.props.downVoteComment(id);
+        //     this.props.downVoteComment(id);
+        //     this.toggleDownVote();
+        // }
+        // else if(this.state.voted === "downVoted"){
+        //     this.setState({voted: ""})
+        //     this.props.upVoteComment(id);
+        //     this.toggleDownVote();
+        // }
     }
 
     deleteComment = () => {

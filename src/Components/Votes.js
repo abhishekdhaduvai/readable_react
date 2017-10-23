@@ -37,45 +37,51 @@ class Votes extends Component {
     }
 
     upVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState({voted: "upVoted"})
-            this.props.upVote(id);
-            this.toggleUpvote();
-        }
-        else if (this.state.voted === "downVoted"){
-            //Flips vote. Increases voteScore by 2
-            this.setState({voted: "upVoted"})
-            this.props.upVote(id);
-            this.props.upVote(id);
-            this.toggleUpvote();
-        }
-        else if (this.state.voted === "upVoted") {
-            //Toggles Vote if clicked on again
-            this.setState({voted: ""})
-            this.props.downVote(id);
-            this.toggleUpvote();
-        }
+        this.props.upVote(id);
+        this.setState({downvoteIcon: notVoted});
+        this.setState({upvoteIcon: vote});
+        // if(this.state.voted === ""){
+        //     this.setState({voted: "upVoted"})
+        //     this.props.upVote(id);
+        //     this.toggleUpvote();
+        // }
+        // else if (this.state.voted === "downVoted"){
+        //     //Flips vote. Increases voteScore by 2
+        //     this.setState({voted: "upVoted"})
+        //     this.props.upVote(id);
+        //     this.props.upVote(id);
+        //     this.toggleUpvote();
+        // }
+        // else if (this.state.voted === "upVoted") {
+        //     //Toggles Vote if clicked on again
+        //     this.setState({voted: ""})
+        //     this.props.downVote(id);
+        //     this.toggleUpvote();
+        // }
     }
 
     downVote = (id) => {
-        if(this.state.voted === ""){
-            this.setState({voted: "downVoted"})
-            this.props.downVote(id);
-            this.toggleDownVote();
-        }
-        else if(this.state.voted === "upVoted"){
-            //Flips vote. Decreases voteScore by 2
-            this.setState({voted: "downVoted"})
-            this.props.downVote(id);
-            this.props.downVote(id);
-            this.toggleDownVote();
-        }
-        else if(this.state.voted === "downVoted"){
-            //Toggles Vote if clicked on again. Resets voteScore
-            this.setState({voted: ""})
-            this.props.upVote(id);
-            this.toggleDownVote();
-        }
+        this.props.downVote(id);
+        this.setState({upvoteIcon: notVoted});
+        this.setState({downvoteIcon: vote});
+        // if(this.state.voted === ""){
+        //     this.setState({voted: "downVoted"})
+        //     this.props.downVote(id);
+        //     this.toggleDownVote();
+        // }
+        // else if(this.state.voted === "upVoted"){
+        //     //Flips vote. Decreases voteScore by 2
+        //     this.setState({voted: "downVoted"})
+        //     this.props.downVote(id);
+        //     this.props.downVote(id);
+        //     this.toggleDownVote();
+        // }
+        // else if(this.state.voted === "downVoted"){
+        //     //Toggles Vote if clicked on again. Resets voteScore
+        //     this.setState({voted: ""})
+        //     this.props.upVote(id);
+        //     this.toggleDownVote();
+        // }
     }
 
     render() {
