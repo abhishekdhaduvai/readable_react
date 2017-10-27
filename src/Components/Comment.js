@@ -15,8 +15,12 @@ class Comment extends Component {
         upvoteIcon: notVoted,
         downvoteIcon: notVoted,
         open: false,
-        comment: this.props.post.body,
+        comment: "",
         edit: false,
+    }
+
+    componentDidMount(){
+        this.setState({comment: this.props.post.body})
     }
 
     handleClose = (input) => {

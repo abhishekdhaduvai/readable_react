@@ -30,11 +30,11 @@ class App extends Component {
           <SubReadable />
         )} /> 
 
-        <Route exact path="/comments/:id" render={() => (
+        <Route exact path="/:category/:id" render={() => (
           <PostDetails />
         )} />
 
-        <Route exact path="/create/new-post" render={() => (
+        <Route exact path="/s/create/new-post" render={() => (
           <NewPost />
         )} />
 
