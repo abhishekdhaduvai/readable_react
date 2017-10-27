@@ -3,42 +3,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import AutoComplete from 'material-ui/AutoComplete';
-import axios from 'axios';
 
-const api = "http://localhost:3001";
-
-// Generate a unique token for storing your bookshelf data on the backend server.
-let token = localStorage.token
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': token
-}
+import { connect } from 'react-redux';
+import * as Actions from '../actions';
 
 class NewPost extends Component {
-
-    componentDidMount(){
-        const api = "http://localhost:3001";
-
-        // Generate a unique token for storing your bookshelf data on the backend server.
-        let token = localStorage.token
-        if (!token)
-        token = localStorage.token = Math.random().toString(36).substr(-8)
-
-        const headers = {
-        'Accept': 'application/json',
-        'Authorization': token
-        }
-
-        axios.get(`${api}/categories`, {headers})
-        .then(response => {
-            let cat = []
-            response.data.categories.map(category => cat.push(category.name))
-            this.setState({categories: cat});
-        })
-    }
 
     state = {
         categories: [],
@@ -70,7 +39,7 @@ class NewPost extends Component {
             this.setState({open: true});
         }
         else {
-            let payload = {
+            let newPost = {
                 id: this.uuid(),
                 timestamp: Date.now(),
                 title: this.state.title,
@@ -79,16 +48,16 @@ class NewPost extends Component {
                 category: this.state.category
             }
 
-            axios.post(`${api}/posts`, payload, { headers })
-            .then(response => {
-                this.setState({
-                    username:"",
-                    title:"",
-                    body:"",
-                    category:""
-                });
-                window.location = '/'
-            });
+            this.props.createPost(newPost)
+            // .then(res => {
+            //     this.setState({
+            //         username:"",
+            //         title:"",
+            //         body:"",
+            //         category:""
+            //     });
+            //     window.location = '/'
+            // })  
         }
     }
 
@@ -102,7 +71,12 @@ class NewPost extends Component {
     }
 
     render(){
-        const { username, title, body } = this.state;
+        const { username, title, body } = this.state;   
+        const { site } = this.props;
+        let cat = [];
+        if(site.categories.length > 0){
+            site.categories.map(category => cat.push(category.name))
+        }
         const actions = [
             <FlatButton
                 label="OK"
@@ -137,8 +111,11 @@ class NewPost extends Component {
                     <AutoComplete
                         style={this.style}
                         hintText="Category"
-                        dataSource={this.state.categories}
-                        onUpdateInput={(val) => this.setState({category: val})}/>
+                        dataSource={cat}
+                        onUpdateInput={(val) => {
+                            this.setState({category: val})
+                            this.setState({categories: cat})
+                        }}/>
                 </div>
 
                 <div style={{marginLeft: "1em", marginBottom:"0.5em"}}>
@@ -162,4 +139,21 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+// export default NewPost;
+
+function mapStateToProps ({ site }) {
+  return {
+    site
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    createPost: (post) => dispatch(Actions.createPost(post))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewPost)

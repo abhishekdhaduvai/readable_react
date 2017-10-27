@@ -54,9 +54,9 @@ class SubReadable extends Component {
                         <div className="subreadable-content">
                             <div className="subreadable-main">
                                 <div>
-                                    {posts.map(post => (
+                                    {posts.map(post =>                                         
                                         <Post key={post.id} post={post}/>
-                                    ))}
+                                    )}
 
                                     {(posts.length === 0 || 
                                     posts.filter(post => post.deleted).length === posts.length) && (
@@ -68,13 +68,8 @@ class SubReadable extends Component {
                                 <RaisedButton 
                                     label="Submit a new Post" 
                                     secondary={true}
-                                    href="create/new-post"
+                                    href="s/create/new-post"
                                     className="add-content-button" />
-                                {/* <RaisedButton 
-                                    label="Create a new Sub" 
-                                    secondary={true}
-                                    href="create/new-sub"
-                                    className="add-content-button" /> */}
                             </div>
                         </div>
                     </div>

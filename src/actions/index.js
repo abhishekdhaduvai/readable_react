@@ -39,7 +39,7 @@ export function fetchPosts(endpoint) {
       else {
         dispatch({type: ACTION.FETCH_POSTS, payload: posts})
       }
-    }) //end fetchPosts
+    })
   }
 }
 
@@ -57,7 +57,7 @@ export function deletePost(id){
   return function(dispatch){
     axios.delete(`${api}/posts/${id}`, {headers})
     .then(response => {      
-      window.location = '/'
+      dispatch({type: ACTION.DELETE_POST, payload:id})
     })
   }
 }
@@ -139,6 +139,15 @@ export function updatePost(post){
       dispatch({type: ACTION.UPDATE_POST, payload: post})
     })
 
+  }
+}
+
+export function createPost(post){
+  return function(dispatch){
+    new Promise(function(resolve, reject) {
+      axios.post(`${api}/posts`, post, {headers})
+      .then(res => window.location="/")
+    })
   }
 }
 

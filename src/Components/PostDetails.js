@@ -44,7 +44,7 @@ class PostDetails extends Component {
     }
 
     componentWillMount(){
-        const id = window.location.pathname.slice(10);
+        const id = window.location.pathname.split("/")[2];
         this.props.fetchComments(id);
         this.props.fetchPost(id);
     }
