@@ -49,15 +49,6 @@ class NewPost extends Component {
             }
 
             this.props.createPost(newPost)
-            // .then(res => {
-            //     this.setState({
-            //         username:"",
-            //         title:"",
-            //         body:"",
-            //         category:""
-            //     });
-            //     window.location = '/'
-            // })  
         }
     }
 
