@@ -1,3 +1,7 @@
+# Readable
+
+[![Build Status](https://travis-ci.org/abhishekdhaduvai/readable_react.svg?branch=master)](https://travis-ci.org/abhishekdhaduvai/readable_react)
+
 ## Running the project
 
 cd into the project repo and run
